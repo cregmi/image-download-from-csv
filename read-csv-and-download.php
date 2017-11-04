@@ -57,6 +57,7 @@ foreach ($temparray as $sku => $images)
     $i = 0;
     $d = 0;
     foreach($url as $key => $value){
+        $value = str_replace(' ', '%20',(trim($value," ")));
         $i = $i + 1;
         if (filter_var($value, FILTER_VALIDATE_URL)){
             $parts = pathinfo($value);
