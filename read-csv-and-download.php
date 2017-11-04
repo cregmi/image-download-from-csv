@@ -35,7 +35,7 @@ for($x=1;$x<$row-1;$x++)
 { 
     $sku = $marray[$x]['SKU'];
     $images = $marray[$x]['Images'];
-    $html = $marray[$x]['Description'];
+    $html = $marray[$x]['Product_Description_1'];
     $doc = new DOMDocument();
     $doc->loadHTML($html);
     
@@ -49,42 +49,61 @@ for($x=1;$x<$row-1;$x++)
 
 }
 
+function get_raw_url($url_string){
+  $parts = parse_url($url_string);
+  $path_parts = array_map('rawurldecode', explode('/', $parts['path']));
+
+  return
+    $parts['scheme'] . '://' .
+    $parts['host'] .
+    implode('/', array_map('rawurlencode', $path_parts))
+  ;
+}
+
 foreach ($temparray as $sku => $images)
 {
     mkdir($path."/".$sku);
+    chdir($path."/".$sku);
     $url = explode(",", $images);
-    echo '<h3>Folder created with name "'.$sku.'" , Image URLs found : '.count($url).'</h3>';
+    echo '<h4>Folder created with name <u>'.$sku.'</u> , Image URLs found : '.count($url).'</h4>';
     $i = 0;
     $d = 0;
     foreach($url as $key => $value){
-        $value = str_replace(' ', '%20',(trim($value," ")));
+        $value = str_replace(' ', '%20',(trim($value,' ')));
         $i = $i + 1;
+        echo $i.': '.$value;
         if (filter_var($value, FILTER_VALIDATE_URL)){
             $parts = pathinfo($value);
             $filename = $parts['basename'];
-            $content = file_get_contents($value);
-            echo $i.': '.$value;
-            if(!$content){
-                echo ' - Error on image fetch';
-            }
-            else{
-                chdir($path."/".$sku); 
-                $download = file_put_contents($filename, $content);
-                if($download=== FALSE){
-                    echo ' - Error on image download';
+            if (!file_exists($filename)){
+                $content = file_get_contents($value);
+                if(!$content){
+                    echo ' - Error on image fetch';
                 }
                 else{
-                    echo ' - Image downloaded, '.($download/1024).'kb';
-                    $d = $d + 1;
-                }  
+                     
+                    $download = file_put_contents($filename, $content);
+                    if($download=== FALSE){
+                        echo ' - Error on image download';
+                    }
+                    else{
+                        echo '<span style = "color:green"> - Image downloaded, '.($download/1024).'kb</span>';
+                        $d = $d + 1;
+                    }  
+                }
+                
             }
+            else{
+                echo '<span style = "color:red"> - Duplicate file, download aborted</span>';
+            }
+
             echo '</br>';
         }
         else{
-            echo $i.': '.$value.' is not a valid URL</br>';
+            echo '<span style = "color:red"> - Not a valid URL</span></br>';
         }                      
     }
-    echo '<u>'.$d.' images downloaded in folder '.$sku.'</u>';
+    echo '<h5>'.$d.' images downloaded in folder '.$sku.'</h5>';
 }
 
 ?>
