@@ -1,4 +1,5 @@
 <?php
+//open the CSV file and put data in a multidimensional array
 $path = getcwd();
 $row = 1;
 $array = array();
@@ -21,51 +22,47 @@ if ($handle !== FALSE) {
         }
         $row++;
     }
+	fclose($handle);
 }
 else
 {
     echo '<h2>Error - No /file.csv/ exist</h2>';
     die();
 }
-fclose('file.csv');
 
+//collect the image URLs from Images and Description
 $index = 0; 
 $temparray = array();
+$tmp = NULL; 
 for($x=1;$x<$row-1;$x++)
 { 
-    $sku = $marray[$x]['SKU'];
+    $imageGroupID = $marray[$x]['ID'];
     $images = $marray[$x]['Images'];
-    $html = $marray[$x]['Product_Description_1'];
+    $html = $marray[$x]['Description'];
     $doc = new DOMDocument();
-    $doc->loadHTML($html);
-    
-    $imageTags = $doc->getElementsByTagName('img');
-    foreach($imageTags as $tag) {
-        $tmp = $tmp.$tag->getAttribute('src').',';
-    }
+	
+		
+	$internalErrors = libxml_use_internal_errors(true);  //https://stackoverflow.com/questions/1685277/warning-domdocumentloadhtml-htmlparseentityref-expecting-in-entity
+	$doc->loadHTML($html);
+	libxml_use_internal_errors($internalErrors);
+		
+	$imageTags = $doc->getElementsByTagName('img');
+	foreach($imageTags as $tag) {
+		$tmp = $tmp.$tag->getAttribute('src').',';
+	}
     $tmp = $tmp.$images;
-    $temparray[$sku] = $tmp;
+    $temparray[$imageGroupID] = $tmp;
     $tmp = NULL;
 
 }
 
-function get_raw_url($url_string){
-  $parts = parse_url($url_string);
-  $path_parts = array_map('rawurldecode', explode('/', $parts['path']));
-
-  return
-    $parts['scheme'] . '://' .
-    $parts['host'] .
-    implode('/', array_map('rawurlencode', $path_parts))
-  ;
-}
-
-foreach ($temparray as $sku => $images)
+//Create folders and download the images from URLs
+foreach ($temparray as $imageGroupID => $images)
 {
-    mkdir($path."/".$sku);
-    chdir($path."/".$sku);
+    mkdir($path."/".$imageGroupID);
+    chdir($path."/".$imageGroupID);
     $url = explode(",", $images);
-    echo '<h4>Folder created with name <u>'.$sku.'</u> , Image URLs found : '.count($url).'</h4>';
+    echo '<h4>Folder created with name <u>'.$imageGroupID.'</u> , Image URLs found : '.count($url).'</h4>';
     $i = 0;
     $d = 0;
     foreach($url as $key => $value){
@@ -87,7 +84,7 @@ foreach ($temparray as $sku => $images)
                         echo ' - Error on image download';
                     }
                     else{
-                        echo '<span style = "color:green"> - Image downloaded, '.($download/1024).'kb</span>';
+                        echo '<span style = "color:green"> - Image downloaded, '.round(($download/1024)).'kb</span>';
                         $d = $d + 1;
                     }  
                 }
@@ -103,7 +100,6 @@ foreach ($temparray as $sku => $images)
             echo '<span style = "color:red"> - Not a valid URL</span></br>';
         }                      
     }
-    echo '<h5>'.$d.' images downloaded in folder '.$sku.'</h5>';
+    echo '<h5>'.$d.' images downloaded in folder '.$imageGroupID.'</h5>';
 }
-
 ?>
