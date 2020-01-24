@@ -1,46 +1,16 @@
-ID,Type,SKU,Name,Description,Images
-186,simple,2674218,Product 01,"<strong>Specifications:</strong>
-<ul>
-         <li>Specification 01</li>
-         <li>Specification 02</li>
-</ul>
-<strong>Details: </strong>
-<img src='http://remote-image-server.com/images-description/image01.jpg' />
-<img src='http://remote-image-server.com/images-description/image02.jpg' />
-<img src='http://remote-image-server.com/images-description/image03.jpg' />","http://remote-image-server.com/images-gallery/image001.jpg,http://remote-image-server.com/images-gallery/image002.jpg,http://remote-image-server.com/images-gallery/image003.jpg"
-187,simple,2674219,Product 02,"<strong>Specifications:</strong>
-<ul>
-         <li>Specification 01</li>
-         <li>Specification 02</li>
-</ul>
-<strong>Details: </strong>
-<img src='http://remote-image-server.com/images-description/image01.jpg' />
-<img src='http://remote-image-server.com/images-description/image02.jpg' />
-<img src='http://remote-image-server.com/images-description/image03.jpg' />","http://remote-image-server.com/images-gallery/image004.jpg,http://remote-image-server.com/images-gallery/image005.jpg,http://remote-image-server.com/images-gallery/image006.jpg"
-188,simple,2674220,Product 03,"<strong>Specifications:</strong>
-<ul>
-         <li>Specification 01</li>
-         <li>Specification 02</li>
-</ul>
-<strong>Details: </strong>
-<img src='http://remote-image-server.com/images-description/image04.jpg' />
-<img src='http://remote-image-server.com/images-description/image05.jpg' />
-<img src='http://remote-image-server.com/images-description/image06.jpg' />","http://remote-image-server.com/images-gallery/image007.jpg,http://remote-image-server.com/images-gallery/image008.jpg,http://remote-image-server.com/images-gallery/image009.jpg"
-189,simple,2674221,Product 04,"<strong>Specifications:</strong>
-<ul>
-         <li>Specification 01</li>
-         <li>Specification 02</li>
-</ul>
-<strong>Details: </strong>
-<img src='http://remote-image-server.com/images-description/image07.jpg' />
-<img src='http://remote-image-server.com/images-description/image08.jpg' />
-<img src='http://remote-image-server.com/images-description/image09.jpg' />","http://remote-image-server.com/images-gallery/image010.jpg,http://remote-image-server.com/images-gallery/image011.jpg,http://remote-image-server.com/images-gallery/image012.jpg"
-190,simple,2674222,Product 05,"<strong>Specifications:</strong>
-<ul>
-         <li>Specification 01</li>
-         <li>Specification 02</li>
-</ul>
-<strong>Details: </strong>
-<img src='http://remote-image-server.com/images-description/image10.jpg' />
-<img src='http://remote-image-server.com/images-description/image11.jpg' />
-<img src='http://remote-image-server.com/images-description/image12.jpg' />","http://remote-image-server.com/images-gallery/image013.jpg,http://remote-image-server.com/images-gallery/image014.jpg,http://remote-image-server.com/images-gallery/image015.jpg"
+ID,Name,Images,Description
+186,ImageGroup186,"https://images.freeimages.com/images/premium/thumbs/1984/19843871-spring-burst-background.jpg, https://images.freeimages.com/images/premium/thumbs/5275/527551-tractor-trailer.jpg","<li class=""premium-item"">
+    <a href=""/istockphoto/file?id=5020611&amp;function=free_listing&amp;location=header&amp;sharedid=5020611"" title=""Set of shopping bags"" id=""premium_header_thumb_5020611"" target=""_blank"">
+        <span class=""premium-img premium-full"">
+                        <img src=""https://images.freeimages.com/images/premium/thumbs/5020/5020611-set-of-shopping-bags.jpg"" alt=""Shopping Bag,Shopping,Sale,..."">
+        </span>
+    </a>
+</li>
+
+<li class=""premium-item"">
+    <a href=""/istockphoto/file?id=3583613&amp;function=free_listing&amp;location=header&amp;sharedid=3583613"" title=""Venice"" id=""premium_header_thumb_3583613"" target=""_blank"">
+        <span class=""premium-img premium-full"">
+                <img src=""https://images.freeimages.com/images/premium/thumbs/3583/3583613-venice.jpg"" alt=""Venice - Italy,Italy,Landsc..."">
+        </span>
+    </a>
+</li>"
