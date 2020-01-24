@@ -1,5 +1,9 @@
 # image-download-from-csv
-PHP script to download images by URL values, reading from given CSV file.
-The PHP script assume, 'file.csv' is present in same folder with at least three column headings 'SKU', 'Description' and 'Images'.
-The php script enlist all the image URLs present on CSV file, from both colum headings 'Description' and 'Images', associating the URL list with the column heading 'SKU'.
-Directory will be created with the name 'SKU' and images for particular 'SKU' will be downloaded inside the directory.
+- PHP script to download images by URL values. The image urls are read from given CSV file.
+- The PHP script assumes that the 'file.csv' is present in same folder with at least three column headings 'ID', 'Image-url' and 'Image-tag'.
+- The php script reads the CSV file and enlist all the image URLs found in the colums 'Image-url' and 'Image-tag'.
+- Folders are created with the name 'ID' and images for that particular 'ID' will be downloaded inside that folder.
+- The example file.csv has two rows, thus two folders are created by the php script with name 186 and 187 which are the IDs of rows.
+- In the file.csv, for the first row 6 image urls are given (2 as Image-url and 4 as Image-tag) and for the second row 3 image urls are given. Thus the php script downloads 9 images altogether, 6 within the folder 186 and 3 within the folder 187.
+
+![Output](https://github.com/cregmi/image-download-from-csv/blob/master/output.png)
